@@ -7,12 +7,11 @@ public class User {
     private String email;
     private PlayerCharacter playerCharacter;
 
-    public User(int id, String userName, String password, String email, PlayerCharacter playerCharacter) {
-        this.id = id;
+    public User(String userName, String password, String email) {
         this.userName = userName;
         this.password = password;
         this.email = email;
-        this.playerCharacter = playerCharacter;
+        this.playerCharacter = null;
     }
 
     public int getId() {

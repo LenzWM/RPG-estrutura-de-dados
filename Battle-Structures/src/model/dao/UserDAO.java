@@ -19,114 +19,67 @@ public class UserDAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 
                 if (rs.next()) {
-                    
-                    String role = rs.getString("role");
-                    if ("regular".equals(role)) {
-                        
-                        return new User(
-                                rs.getString("name"),
-                                rs.getString("email"),
-                                rs.getString("password"),
-                                rs.getString("cpf")
-                        );
-                        
-                    } else if ("restaurant".equals(role)) {
-                        
-                        return new Restaurant(
-                                rs.getString("name"),
-                                rs.getString("email"),
-                                rs.getString("password"),
-                                rs.getString("cpf"),
-                                rs.getString("additional_info")
-                        );
-                    }
+                    return new User(
+                        rs.getString("userName"),
+                        rs.getString("password"),
+                        rs.getString("email")
+                    );
                 }
             }
         }
         return null;
     }
     
-    public String checkLogin(String email, String password) throws SQLException{
+    public boolean checkLogin(String email, String password) throws SQLException {
+        String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
         
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        String role = null;
-        
-        try{
-            stmt = con.prepareStatement("SELECT * FROM users WHERE email=? AND password=?");
+        try (Connection con = ConnectionFactory.getConnection();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+
             stmt.setString(1, email);
             stmt.setString(2, password);
-            
-            rs = stmt.executeQuery();
-            
-            if(rs.next()){
-                
-                role = rs.getString("role");
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next(); // login válido se encontrou o usuário
             }
-        }
-        catch(SQLException ex) {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Unsuccessful connection", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
-        finally{
-            ConnectionFactory.closeConnection(con, stmt, rs);
-        }
-        
-        return role;
     }
     
-    public void create(User u) throws SQLException{
+    public void create(User u) throws SQLException {
+        String sql = "INSERT INTO users(userName, password, email) VALUES(?,?,?)";
         
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null;
-        
-        try {
-            stmt = con.prepareStatement("INSERT INTO users(name, email, password, role, additional_info) VALUES(?,?,?,?,?)");
-            stmt.setString(1, u.getName());
-            stmt.setString(2, u.getEmail());
-            stmt.setString(3, u.getPassword());
-            stmt.setString(4, u.getRole());
-            
-            if(u instanceof Restaurant){
-                stmt.setString(5, ((Restaurant) u).getAddress());
-            }
-            else{
-                stmt.setNull(5, Types.VARCHAR);
-            }
-            
+        try (Connection con = ConnectionFactory.getConnection();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            stmt.setString(1, u.getUserName());
+            stmt.setString(2, u.getPassword());
+            stmt.setString(3, u.getEmail());
+
             stmt.executeUpdate();
-            
+
             JOptionPane.showMessageDialog(null, "Saved successfully");
-            
+
         } catch (SQLException ex) {
-            
             JOptionPane.showMessageDialog(null, "Save error: " + ex);
         }
-        finally{
-            ConnectionFactory.closeConnection(con, stmt);
-        }
     }
     
-    public void delete(User u) throws SQLException{
-        
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null;
-        
-        try {
-            stmt = con.prepareStatement("DELETE FROM products WHERE id = ?");
+    public void delete(User u) throws SQLException {
+        String sql = "DELETE FROM users WHERE id = ?";
+
+        try (Connection con = ConnectionFactory.getConnection();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+
             stmt.setInt(1, u.getId());
-            
             stmt.executeUpdate();
-            
+
             JOptionPane.showMessageDialog(null, "Account deleted successfully");
-            
+
         } catch (SQLException ex) {
-            
             JOptionPane.showMessageDialog(null, "Delete error: " + ex);
         }
-        finally{
-            ConnectionFactory.closeConnection(con, stmt);
-        }
     }
-    
 }
