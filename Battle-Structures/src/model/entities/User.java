@@ -5,12 +5,14 @@ public class User {
     private String userName;
     private String password;
     private String email;
+    private PlayerCharacter playerCharacter;
 
-    public User(int id, String userName, String password, String email) {
+    public User(int id, String userName, String password, String email, PlayerCharacter playerCharacter) {
         this.id = id;
         this.userName = userName;
         this.password = password;
         this.email = email;
+        this.playerCharacter = playerCharacter;
     }
 
     public int getId() {
@@ -45,5 +47,11 @@ public class User {
         this.email = email;
     }
     
+    public PlayerCharacter getPlayerCharacter() {
+        return playerCharacter;
+    }
     
+    public void setPlayerCharacter(PlayerCharacter playerCharacter) {
+        this.playerCharacter = playerCharacter;
+    }
 }

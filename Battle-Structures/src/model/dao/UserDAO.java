@@ -23,7 +23,7 @@ public class UserDAO {
                     String role = rs.getString("role");
                     if ("regular".equals(role)) {
                         
-                        return new Regular(
+                        return new User(
                                 rs.getString("name"),
                                 rs.getString("email"),
                                 rs.getString("password"),

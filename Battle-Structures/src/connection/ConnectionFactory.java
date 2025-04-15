@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class ConnectionFactory {
     
-    private static final String URL = "jdbc:postgresql://localhost:5432/ifood_db";
+    private static final String URL = "jdbc:postgresql://localhost:5432/battle_structures_db";
     private static final String USER = "postgres";
     private static final String PASSWORD = "110723";
     
