@@ -11,24 +11,24 @@ public class Main {
     //     Scanner sc = new Scanner(System.in);
     //     User newUser = new User(null, null, null);
         
-        int selectedOption = 0;
-        String userName;
-        String password;
-        String email;
+        // int selectedOption = 0;
+        // String userName;
+        // String password;
+        // String email;
         
     //         ClearConsole.clear();
     //         System.out.println("----- Battle Structures -----\n");
     //         System.out.print("  > Press any key to continue <");
     //         sc.nextLine();
             
-        while(true) {
+        // while(true) {
             
-            ClearConsole.clear();
-            System.out.println("> Login    (1)");
-            System.out.println("> Sign up  (2)");
-            System.out.println("> Exit     (3)");
-            selectedOption = sc.nextInt();
-            sc.nextLine();
+        //     ClearConsole.clear();
+        //     System.out.println("> Login    (1)");
+        //     System.out.println("> Sign up  (2)");
+        //     System.out.println("> Exit     (3)");
+        //     selectedOption = sc.nextInt();
+        //     sc.nextLine();
             
     //         switch(selectedOption) {
     //             case 1 -> {
