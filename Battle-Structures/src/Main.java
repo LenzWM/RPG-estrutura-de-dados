@@ -21,14 +21,14 @@ public class Main {
     //         System.out.print("  > Press any key to continue <");
     //         sc.nextLine();
             
-        while(true) {
-            
-            ClearConsole.clear();
-            System.out.println("> Login    (1)");
-            System.out.println("> Sign up  (2)");
-            System.out.println("> Exit     (3)");
-            selectedOption = sc.nextInt();
-            sc.nextLine();
+//        while(true) {
+//            
+//            ClearConsole.clear();
+//            System.out.println("> Login    (1)");
+//            System.out.println("> Sign up  (2)");
+//            System.out.println("> Exit     (3)");
+//            selectedOption = sc.nextInt();
+//            sc.nextLine();
             
     //         switch(selectedOption) {
     //             case 1 -> {

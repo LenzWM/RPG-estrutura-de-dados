@@ -1,4 +1,5 @@
 package model;
+import Others.ClearConsole;
 import model.entities.*;
 import structures.*;
 
@@ -24,8 +25,9 @@ public class Battle {
         }
 
         while (!isBattleOver()){
+            ClearConsole.clear();
             turnCounter++;
-            System.out.println("Turn " + turnCounter + ": ");
+            System.out.print("Turn " + turnCounter + ": ");
             executeTurn();
         }
     }

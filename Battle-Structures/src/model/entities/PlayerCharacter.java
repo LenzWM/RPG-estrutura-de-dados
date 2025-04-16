@@ -1,5 +1,6 @@
 package model.entities;
 
+import Others.ClearConsole;
 import java.util.Scanner;
 import model.Battle;
 import structures.*;
@@ -42,6 +43,7 @@ public class PlayerCharacter extends Entity {
         Queue enemies = battle.getTurnOrder();
         Scanner scanner = new Scanner(System.in);
         battle.showState();
+        System.out.println("\nPlayer's HP: " + getCurrentHp() + "/" + getMaxHp());
         System.out.println("Choose an action to take:");
         System.out.println("1. Attack an enemy");
         System.out.println("2. Use a skill");
@@ -51,6 +53,7 @@ public class PlayerCharacter extends Entity {
         scanner.nextLine();
         switch (action) {
             case 1 -> {
+                ClearConsole.clear();
                 System.out.println("Choose an enemy to attack:");
                 battle.showState();
                 Node<Entity> current = enemies.getHead();
