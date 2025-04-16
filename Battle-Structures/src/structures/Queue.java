@@ -3,8 +3,8 @@ package structures;
 import model.entities.*;
 
 public class Queue {
-    public NodeQueue<Entity> head;
-    public NodeQueue<Entity> tail;
+    private NodeQueue<Entity> head;
+    private NodeQueue<Entity> tail;
 
     public void enqueue(Entity newEntity){
         NodeQueue<Entity> newNode = new NodeQueue<>(newEntity);
@@ -19,14 +19,16 @@ public class Queue {
     
     }
 
-    public void dequeue(){
+    public Entity dequeue(){
         if (isEmpty()){
-            return;
+            throw  new RuntimeException("Queue is empty. Cannot dequeue.");
         }
         NodeQueue<Entity> temp = head;
         head = head.prev;
         head.next = null;
         temp.prev = null;
+
+        return  temp.data;
     }
 
     public Entity peekEntity(){
@@ -35,6 +37,22 @@ public class Queue {
 
     public Boolean isEmpty() {
         return head == null;
+    }
+
+    public NodeQueue<Entity> getHead() {
+        return head;
+    }
+
+    public void setHead(NodeQueue<Entity> head) {
+        this.head = head;
+    }
+
+    public NodeQueue<Entity> getTail() {
+        return tail;
+    }
+
+    public void setTail(NodeQueue<Entity> tail) {
+        this.tail = tail;
     }
 
 }

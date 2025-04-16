@@ -20,7 +20,7 @@ public class Stack {
 
     public Entity pop() {
         if (isEmpty()) {
-            return null;
+            throw new RuntimeException("Stack is empty. Cannot pop.");
         }
         Entity data = head.data; 
         head = head.prev; 
@@ -48,8 +48,10 @@ public class Stack {
         length = 0;
     }
 
-    public void setHead(NodeStack<Entity> head) {
-        this.head = head;
+    public NodeStack<Entity> getHead() {
+        return head;
     }
+
+    
 
 }

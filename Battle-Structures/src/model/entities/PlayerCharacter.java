@@ -1,17 +1,12 @@
 package model.entities;
 
-public class PlayerCharacter extends Entity {
+import model.Battle;
 
+public class PlayerCharacter extends Entity {
     private int id;
-    private String name;
-    private int level;
-    private float maxHp;
-    private float currentHp;
-    private float maxMana;
-    private float currentMana;
-    
-    public PlayerCharacter(int id, float maxHp, float currentHp, float maxMana, float currentMana, int level, String name) {
-        super(maxHp, currentHp, maxMana, currentMana, level, name);
+
+    public PlayerCharacter(int id, float maxHp, float maxMana, float currentMana, int level, String name) {
+        super(maxHp, maxMana, currentMana, level, name);
         this.id = id;
     }
 
@@ -24,62 +19,31 @@ public class PlayerCharacter extends Entity {
     }
 
     @Override
-    public String getName() {
-        return name;
+    public void attack(Entity target) {
+        if (target == null) {
+            throw  new RuntimeException(getName() + " tried to attack a null target.");
+        }
+
+        System.out.println(getName() + " attacks " + target.getName() );
     }
 
     @Override
-    public void setName(String name) {
-        this.name = name;
+    public boolean isAlive() {
+        return getCurrentHp() > 0;
     }
 
     @Override
-    public int getLevel() {
-        return level;
+    public void takeTurn(Battle battle) {
+        System.out.println(getName() + "'s turn!");
+        
     }
 
-    @Override
-    public void setLevel(int level) {
-        this.level = level;
-    }
 
-    @Override
-    public float getMaxHp() {
-        return maxHp;
-    }
-
-    @Override
-    public void setMaxHp(float maxHp) {
-        this.maxHp = maxHp;
-    }
-
-    @Override
-    public float getCurrentHp() {
-        return currentHp;
-    }
-
-    @Override
-    public void setCurrentHp(float currentHp) {
-        this.currentHp = currentHp;
-    }
-
-    @Override
-    public float getMaxMana() {
-        return maxMana;
-    }
-
-    @Override
-    public void setMaxMana(float maxMana) {
-        this.maxMana = maxMana;
-    }
-
-    @Override
-    public float getCurrentMana() {
-        return currentMana;
-    }
-
-    @Override
-    public void setCurrentMana(float currentMana) {
-        this.currentMana = currentMana;
+    public void levelUp() {
+        setLevel(getLevel() + 1);
+        setMaxHp(getMaxHp() * 1.1f); // Increase max HP by 10%
+        setCurrentHp(getMaxHp()); // Restore current HP to max
+        setMaxMana(getMaxMana() * 1.1f); // Increase max Mana by 10%
+        setCurrentMana(getMaxMana()); // Restore current Mana to max
     }
 }
