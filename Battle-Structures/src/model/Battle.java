@@ -1,5 +1,5 @@
 package model;
-import model.entities.Entity;
+import model.entities.*;
 import structures.*;
 
 public class Battle {
@@ -17,10 +17,16 @@ public class Battle {
     }
 
     public void startBattle(){
-        NodeQueue<Entity> current = participants.getHead();
+        Node<Entity> current = participants.getHead();
         while(current != null){
             turnOrder.enqueue(current.data);
             current = current.prev;
+        }
+
+        while (!isBattleOver()){
+            turnCounter++;
+            System.out.println("Turn " + turnCounter + ": ");
+            executeTurn();
         }
     }
 
@@ -41,7 +47,7 @@ public class Battle {
 
     public void showTurnOrder(){
         System.out.println("Turn Order: ");
-        NodeQueue<Entity> current = turnOrder.getHead();
+        Node<Entity> current = turnOrder.getHead();
         while(current != null){
             System.out.println(current.data.getName());
             current = current.prev;
@@ -50,12 +56,80 @@ public class Battle {
 
     public void showState(){
         System.out.println("Turn Order: ");
-        NodeQueue<Entity> current = turnOrder.getHead();
+        Node<Entity> current = turnOrder.getHead();
+        int i = 1;
         while(current != null){
-            System.out.println(current.data.getName() + " HP: " + current.data.getCurrentHp() + "/" + current.data.getMaxHp());
+            System.out.println(i + ": " +current.data.getName() + " HP: " + current.data.getCurrentHp() + "/" + current.data.getMaxHp());
             current = current.prev;
+            i++;
         }
+        
+        showDefeatOrder();
 
         System.out.println();
     }
+
+    public void showDefeatOrder(){
+        System.out.println("Defeated: ");
+        NodeStack<Entity> current = defeatOrder.getHead();
+        while(current != null){
+            System.out.println(current.data.getName() + ": DEFEATED" );
+            current = current.prev;
+        }
+    }
+
+    public boolean isBattleOver(){
+        Node<Entity> current = participants.getHead();
+        int counter = 0;
+        while(current != null){
+            if (current.data.isAlive()){
+                counter++;
+            }
+            current = current.prev;
+        }
+        
+        return counter == 0 || counter == 1;
+    }
+
+    public int getBattleID() {
+        return battleID;
+    }
+
+    public void setBattleID(int battleID) {
+        this.battleID = battleID;
+    }
+
+    public int getTurnCounter() {
+        return turnCounter;
+    }
+
+    public void setTurnCounter(int turnCounter) {
+        this.turnCounter = turnCounter;
+    }
+
+    public Stack getDefeatOrder() {
+        return defeatOrder;
+    }
+
+    public void setDefeatOrder(Stack defeatOrder) {
+        this.defeatOrder = defeatOrder;
+    }
+
+    public Queue getTurnOrder() {
+        return turnOrder;
+    }
+
+    public void setTurnOrder(Queue turnOrder) {
+        this.turnOrder = turnOrder;
+    }
+
+    public LinkedList getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(LinkedList participants) {
+        this.participants = participants;
+    }
+
+    
 }

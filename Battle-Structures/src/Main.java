@@ -136,17 +136,15 @@ public class Main {
     }
 
     public static void runGame(){
-        Entity player = new PlayerCharacter(1, 100, 50, 50, 1, "Player");
-        Entity enemy = new Enemie("Enemy", 1, 100, 50, 50);
-        Entity boss = new Enemie("Boss", 1, 200,  50, 50);
+        Entity player = new PlayerCharacter(1, 100, 50, 50, 1, "Player", 30);
+        Entity enemy = new Enemie("Enemy", 1, 40, 50, 50, 10);
+        Entity boss = new Enemie("Boss", 1, 200,  50, 50, 20);
         LinkedList participants = new LinkedList();
         participants.addTail(player);
         participants.addTail(enemy);
-        participants.addTail(boss);
 
         Battle battle = new Battle(participants);
         battle.startBattle();
-        battle.showTurnOrder();
 
     }
 }

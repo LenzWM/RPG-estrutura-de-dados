@@ -3,8 +3,8 @@ package structures;
 import model.entities.Entity;
 
 public class LinkedList {
-    private NodeQueue<Entity> head;
-    private NodeQueue<Entity> tail;
+    private Node<Entity> head;
+    private Node<Entity> tail;
 
 
     public LinkedList(){
@@ -13,7 +13,7 @@ public class LinkedList {
     }
 
     public void addTail(Entity data){
-        NodeQueue<Entity> newNode = new NodeQueue<>(data);
+        Node<Entity> newNode = new Node<>(data);
         if (isEmpty()){
             head = newNode;
             tail = newNode;
@@ -35,7 +35,7 @@ public class LinkedList {
             return temp;
         }
         
-        NodeQueue<Entity> temp = head;
+        Node<Entity> temp = head;
         head = head.prev;
         head.next = null;
         temp.prev = null;
@@ -44,7 +44,21 @@ public class LinkedList {
 
     }
 
-    public NodeQueue<Entity> peek(){
+    public Entity getItemByIndex(int index) {
+        if (isEmpty()){
+            throw new RuntimeException("List is empty. Cannot get item by index.");
+        }
+        Node<Entity> current = head;
+        for (int i = 0; i < index; i++){
+            if (current == null){
+                throw new RuntimeException("Index out of bounds.");
+            }
+            current = current.prev;
+        }
+        return current.data;
+    }
+
+    public Node<Entity> peek(){
         if (isEmpty()){
             throw new RuntimeException("List is empty. Cannot peek.");
         }
@@ -55,11 +69,11 @@ public class LinkedList {
         return head==null;
     }
 
-    public NodeQueue<Entity> getHead() {
+    public Node<Entity> getHead() {
         return head;
     }
 
-    public void setHead(NodeQueue<Entity> head) {
+    public void setHead(Node<Entity> head) {
         this.head = head;
     }
 

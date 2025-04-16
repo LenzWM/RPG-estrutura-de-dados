@@ -2,8 +2,8 @@ package model.entities;
 import model.Battle;
 
 public class Enemie extends Entity{
-    public Enemie(String name, int level, float maxHp,  float maxMana, float currentMana) {
-        super(maxHp, maxMana, currentMana, level, name);
+    public Enemie(String name, int level, float maxHp,  float maxMana, float currentMana, int damage) {
+        super(maxHp, maxMana, currentMana, level, name, damage);
     }
     
     @Override
