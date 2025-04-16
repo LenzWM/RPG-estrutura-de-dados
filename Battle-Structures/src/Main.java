@@ -1,7 +1,9 @@
 import java.sql.SQLException;
 import model.Battle;
-import model.entities.*;
-import structures.*;
+import model.entities.Enemie;
+import model.entities.Entity;
+import model.entities.PlayerCharacter;
+import structures.LinkedList;
 
 public class Main {
     static final String EMAIL_REGEX = "^[a-zA-Z0-9._]+@gmail.com$";
@@ -16,11 +18,6 @@ public class Main {
         String password;
         String email;
         
-    //         ClearConsole.clear();
-    //         System.out.println("----- Battle Structures -----\n");
-    //         System.out.print("  > Press any key to continue <");
-    //         sc.nextLine();
-            
 //        while(true) {
 //            
 //            ClearConsole.clear();
@@ -136,7 +133,7 @@ public class Main {
     //     return matcher.matches();
         runGame();
     }
-
+    
     public static void runGame(){
         Entity player = new PlayerCharacter(1, 100, 50, 50, 1, "Player", 30);
         Entity enemy = new Enemie("Enemy", 1, 40, 50, 50, 10);
@@ -147,9 +144,8 @@ public class Main {
 
         Battle battle = new Battle(participants);
         battle.startBattle();
-
     }
-    
+
     public static boolean isValidPassword(String password) {
         return !(password == null || password.isEmpty());
     }
