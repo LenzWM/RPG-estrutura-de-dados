@@ -7,14 +7,14 @@ import model.dao.UserDAO;
 import model.entities.User;
 
 public class Main {
-    static final String EMAIL_REGEX = "^[a-zA-Z0-9._]+@(gmail | hotmail)\\.com$";
+    static final String EMAIL_REGEX = "^[a-zA-Z0-9._]+@gmail.com$";
     
     public static void main(String[] args) throws SQLException {
         UserDAO dao = new UserDAO();
         Scanner sc = new Scanner(System.in);
         User newUser = new User(null, null, null);
         
-        int selectedOption = 0, num = 0;
+        int selectedOption = 0;
         String userName;
         String password;
         String email;
@@ -24,12 +24,14 @@ public class Main {
             System.out.print("  > Press any key to continue <");
             sc.nextLine();
             
-        while(num != 1) {
+        while(true) {
             
             ClearConsole.clear();
             System.out.println("> Login    (1)");
             System.out.println("> Sign up  (2)");
             System.out.println("> Exit     (3)");
+            selectedOption = sc.nextInt();
+            sc.nextLine();
             
             switch(selectedOption) {
                 case 1 -> {
@@ -55,18 +57,23 @@ public class Main {
                     }
                 }
                 case 2 -> {
-                    System.out.println("Enter a user name: ");
+                    System.out.print("Enter a user name: ");
                     userName = sc.nextLine();
-                    System.out.println("Enter an email: ");
+                    System.out.print("Enter an email: ");
                     email = sc.nextLine();
-                    System.out.println("Enter a password: ");
+                    System.out.print("Enter a password: ");
                     password = sc.nextLine();
+                    
+                    if(!isValidEmail(email) || !isValidPassword(password)) {
+                        System.out.println("Enter a valid email and/or password");
+                        sc.nextLine();
+                        continue;
+                    }
                     
                     newUser.setUserName(userName);
                     newUser.setEmail(email);
                     newUser.setPassword(password);
                     dao.create(newUser);
-                    num++;
                     break;
                 }
                 case 3 -> {
@@ -79,6 +86,7 @@ public class Main {
                     continue;
                 }
             }
+            break;
         }   
 
         while(true) {
@@ -134,6 +142,10 @@ public class Main {
         Pattern pattern = Pattern.compile(EMAIL_REGEX);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
+    }
+    
+    public static boolean isValidPassword(String password) {
+        return !(password == null || password.isEmpty());
     }
 }
 

@@ -60,10 +60,12 @@ public class UserDAO {
 
             stmt.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Saved successfully");
+            System.out.println("Saved user");
+            //JOptionPane.showMessageDialog(null, "Saved successfully");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Save error: " + ex);
+            //JOptionPane.showMessageDialog(null, "Save error: " + ex);
+            System.out.println("Error");
         }
     }
     
