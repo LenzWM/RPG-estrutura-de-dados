@@ -5,11 +5,13 @@ import model.entities.Entity;
 public class LinkedList {
     private Node<Entity> head;
     private Node<Entity> tail;
+    private int size;
 
 
     public LinkedList(){
         head = null;
         tail = null;
+        size =0;
     }
 
     public void addTail(Entity data){
@@ -17,11 +19,13 @@ public class LinkedList {
         if (isEmpty()){
             head = newNode;
             tail = newNode;
+            size++;
             return;
         }
         tail.prev = newNode;
         newNode.next = tail;
         tail = newNode;
+        size++;
     }
 
     public Entity pop(){
@@ -39,7 +43,7 @@ public class LinkedList {
         head = head.prev;
         head.next = null;
         temp.prev = null;
-
+        size--;
         return temp.data;
 
     }
@@ -76,5 +80,23 @@ public class LinkedList {
     public void setHead(Node<Entity> head) {
         this.head = head;
     }
+
+    public Node<Entity> getTail() {
+        return tail;
+    }
+
+    public void setTail(Node<Entity> tail) {
+        this.tail = tail;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    
 
 }

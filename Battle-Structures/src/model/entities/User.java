@@ -1,4 +1,5 @@
 package model.entities;
+import structures.*;
 
 public class User {
     private int id;
@@ -6,12 +7,36 @@ public class User {
     private String password;
     private String email;
     private PlayerCharacter playerCharacter;
+    private LinkedList personagens;
+
+    public User(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+        this.email = ""; // Define um valor padrão para o email
+        this.playerCharacter = null;
+        personagens = new LinkedList();
+
+    }
 
     public User(String userName, String password, String email) {
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.playerCharacter = null;
+        personagens = new LinkedList();
+    }
+
+    public void criarPersonagem(String nome) {
+        int id = personagens.getSize() + 1;
+        int nivel = 1;
+        int vidaBase = 50 + (nivel * 10);
+        int manaBase = 30 + (nivel * 5);
+        PlayerCharacter novoPersonagem = new PlayerCharacter(vidaBase, manaBase, id, vidaBase, nivel, nome, manaBase);
+        personagens.addTail(novoPersonagem);
+        
+        if (personagens.getHead() == null) {
+            playerCharacter= novoPersonagem;
+        }
     }
 
     public int getId() {
@@ -53,4 +78,13 @@ public class User {
     public void setPlayerCharacter(PlayerCharacter playerCharacter) {
         this.playerCharacter = playerCharacter;
     }
+
+    public LinkedList getPersonagens() {
+        return personagens;
+    }
+
+    public void setPersonagens(LinkedList personagens) {
+        this.personagens = personagens;
+    }
+
 }

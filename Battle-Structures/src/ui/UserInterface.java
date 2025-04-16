@@ -1,28 +1,30 @@
+package ui;
 import java.util.Random;
 import java.util.Scanner;
 
+
+import model.Battle;
 import model.entities.Enemie;
 import model.entities.PlayerCharacter;
 import model.entities.User;
 import presitence.Persistencia;
 import java.util.LinkedList;
-import model.entities.User;
+import model.entities.*;
+import structures.*;
 
-public class userInterface {
+public class UserInterface {
 
     private Scanner scanner;
-    private LinkedList<User> Players;
-    private User PlayerLogado;
     private LinkedList<User> players;
     private User playerLogado;
 
-    public userInterface() {
+    public UserInterface() {
         this.scanner = new Scanner(System.in);
         this.players = new LinkedList<>();
         this.players = Persistencia.carregarJogadores();
     }
 
-    private void Menu(){
+    public void Menu(){
         while (true) {
             System.out.println("\n=== RPG BATTLE SYSTEM ===");
             System.out.println("1. Login");
@@ -155,23 +157,35 @@ public class userInterface {
 
     private void listarPersonagens(){
         System.out.println("\n=== SEUS PERSONAGENS ===");
-        if (playerLogado.getPlayerCharacters().size() == 0) {
+        if (playerLogado.getPersonagens().getSize() == 0) {
             System.out.println("Você não tem personagens ainda!!");
             return;
         }
 
-        for (int i = 0; i < playerLogado.getPlayerCharacters().size(); i++) {
-            PlayerCharacter p = playerLogado.getPlayerCharacters().get(i);
+        PlayerCharacter p = (PlayerCharacter) playerLogado.getPersonagens().getHead().data;
+        for (int i = 0; i < playerLogado.getPersonagens().getSize(); i++) {
             System.out.println(p.getId() + ": " + p.getName() + " (Nível " + p.getLevel() + ") - HP: " + p.getMaxHp());
         }
     }
 
     private void selecionarPersonagemAtivo() {
         listarPersonagens();
-        if (playerLogado.getPlayerCharacter() == null) {
+        if (playerLogado.getPersonagens().getHead() == null) {
             System.out.println("Nenhum personagem disponível para selecionar!");
             return;
         }
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Digite o id do seu personagem: ");
+        int escolhaID = sc.nextInt();
+        sc.nextLine();
+        Node<Entity> current = playerLogado.getPersonagens().getHead();
+        while (current != null){
+            if (((PlayerCharacter) current.data).getId()== escolhaID){
+                playerLogado.setPlayerCharacter(((PlayerCharacter)current.data));
+            }
+            current = current.prev;
+        }
+
 
         System.out.println("Personagem ativo: " + playerLogado.getPlayerCharacter().getName());
     }
@@ -181,7 +195,16 @@ public class userInterface {
     }
 
     private void iniciarBatalhaPvP (){
+        Entity player = new PlayerCharacter(1, 100, 50, 50, 1, "Player", 30);
+        Entity enemy = new Enemie("Enemy", 1, 40, 50, 50, 10);
+        Entity boss = new Enemie("Boss", 1, 200,  50, 50, 20);
+        LinkedList participants = new LinkedList();
+        participants.ad
+        participants.addTail(player);
+        participants.addTail(enemy);
 
+        Battle battle = new Battle(participants);
+        battle.startBattle();
     }
 
 }
