@@ -18,11 +18,6 @@ public class Enemie extends Entity{
         }
 
         System.out.println(getName() + " attacks " + target.getName());
-        try {
-            Thread.sleep(2300);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Enemie.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     @Override
@@ -65,6 +60,11 @@ public class Enemie extends Entity{
                 affectAllTargets(battle.getParticipants());
             }
         }
+        try {
+            Thread.sleep(2300);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Enemie.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private Entity findAliveTarget(LinkedList participants) {
@@ -84,11 +84,6 @@ public class Enemie extends Entity{
             if (current.data.isAlive() && current.data instanceof PlayerCharacter) {
                 System.out.println(getName() + " hits " + current.data.getName() + " with dark energy!");
                 current.data.takeDamage(getDamage() / 2);
-                try {
-                    Thread.sleep(2300);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Enemie.class.getName()).log(Level.SEVERE, null, ex);
-                }
             }
             current = current.prev;
         }
