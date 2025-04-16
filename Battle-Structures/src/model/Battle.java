@@ -9,6 +9,7 @@ public class Battle {
     private Stack defeatOrder;
     private Queue turnOrder;
     private LinkedList participants;
+    private boolean playerWon;
 
 
     public Battle(LinkedList participants){
@@ -30,6 +31,15 @@ public class Battle {
             System.out.print("Turn " + turnCounter + ": ");
             executeTurn();
         }
+        
+        if (playerWon) {
+            System.out.println("You won! But at what cost?.");
+            System.out.println("No mental sanity remaining.");
+            
+        }else {
+            System.out.println("> GAME OVER <");
+        }
+        
     }
 
     public void executeTurn(){
@@ -87,10 +97,18 @@ public class Battle {
             if (current.data.isAlive()){
                 counter++;
             }
+            if (current.data instanceof PlayerCharacter && !current.data.isAlive()){
+                playerWon = false;
+                return true;
+            }
+            
             current = current.prev;
         }
-        
-        return counter == 0 || counter == 1;
+        if (counter == 0 || counter == 1){
+            playerWon = true;
+            return true;
+        }
+        return false;
     }
 
     public int getBattleID() {
