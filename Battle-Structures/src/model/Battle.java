@@ -8,10 +8,11 @@ public class Battle {
     private int turnCounter;
     private Stack defeatOrder;
     private Queue turnOrder;
-    private LinkedList participants;
+    private LinkedListOur participants;
+    private boolean playerWon;
 
 
-    public Battle(LinkedList participants){
+    public Battle(LinkedListOur participants){
         defeatOrder = new Stack();
         turnOrder = new Queue();
         this.participants = participants;
@@ -46,7 +47,7 @@ public class Battle {
             defeatOrder.push(current);
         }
     }
-
+    
     public void showTurnOrder(){
         System.out.println("Turn Order: ");
         Node<Entity> current = turnOrder.getHead();
@@ -125,11 +126,11 @@ public class Battle {
         this.turnOrder = turnOrder;
     }
 
-    public LinkedList getParticipants() {
+    public LinkedListOur getParticipants() {
         return participants;
     }
 
-    public void setParticipants(LinkedList participants) {
+    public void setParticipants(LinkedListOur participants) {
         this.participants = participants;
     }
 

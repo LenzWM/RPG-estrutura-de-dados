@@ -2,13 +2,13 @@ package structures;
 
 import model.entities.Entity;
 
-public class LinkedList {
+public class LinkedListOur {
     private Node<Entity> head;
     private Node<Entity> tail;
     private int size;
 
 
-    public LinkedList(){
+    public LinkedListOur(){
         head = null;
         tail = null;
         size =0;

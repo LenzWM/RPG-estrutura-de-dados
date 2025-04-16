@@ -191,20 +191,19 @@ public class UserInterface {
     }
 
     private void iniciarBatalhaPvE (){
-
-    }
-
-    private void iniciarBatalhaPvP (){
-        Entity player = new PlayerCharacter(1, 100, 50, 50, 1, "Player", 30);
         Entity enemy = new Enemie("Enemy", 1, 40, 50, 50, 10);
         Entity boss = new Enemie("Boss", 1, 200,  50, 50, 20);
-        LinkedList participants = new LinkedList();
-        participants.ad
-        participants.addTail(player);
+        LinkedListOur participants = new LinkedListOur();
+        participants.addTail(playerLogado.getPlayerCharacter());
+        participants.addTail(boss);
         participants.addTail(enemy);
 
         Battle battle = new Battle(participants);
         battle.startBattle();
+    }
+
+    private void iniciarBatalhaPvP (){
+        System.out.println("NAO TEM");
     }
 
 }

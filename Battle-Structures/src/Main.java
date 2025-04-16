@@ -15,10 +15,6 @@ public class Main {
         
     }
 
-    public static void runGame(){
-        
-
-    }
     
     public static boolean isValidPassword(String password) {
         return !(password == null || password.isEmpty());

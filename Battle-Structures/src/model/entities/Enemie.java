@@ -3,7 +3,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Battle;
-import structures.LinkedList;
+import structures.LinkedListOur;
 import structures.Node;
 
 public class Enemie extends Entity{
@@ -67,7 +67,7 @@ public class Enemie extends Entity{
         }
     }
     
-    private Entity findAliveTarget(LinkedList participants) {
+    private Entity findAliveTarget(LinkedListOur participants) {
         Node<Entity> current = participants.getHead();
         while (current != null) {
             if (current.data.isAlive() && current.data instanceof PlayerCharacter) {
@@ -78,7 +78,7 @@ public class Enemie extends Entity{
         return null;
     }
     
-    private void affectAllTargets(LinkedList participants) {
+    private void affectAllTargets(LinkedListOur participants) {
         Node<Entity> current = participants.getHead();
         while (current != null) {
             if (current.data.isAlive() && current.data instanceof PlayerCharacter) {

@@ -7,14 +7,14 @@ public class User {
     private String password;
     private String email;
     private PlayerCharacter playerCharacter;
-    private LinkedList personagens;
+    private LinkedListOur personagens;
 
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
         this.email = ""; // Define um valor padrão para o email
         this.playerCharacter = null;
-        personagens = new LinkedList();
+        personagens = new LinkedListOur();
 
     }
 
@@ -23,7 +23,7 @@ public class User {
         this.password = password;
         this.email = email;
         this.playerCharacter = null;
-        personagens = new LinkedList();
+        personagens = new LinkedListOur();
     }
 
     public void criarPersonagem(String nome) {
@@ -79,11 +79,11 @@ public class User {
         this.playerCharacter = playerCharacter;
     }
 
-    public LinkedList getPersonagens() {
+    public LinkedListOur getPersonagens() {
         return personagens;
     }
 
-    public void setPersonagens(LinkedList personagens) {
+    public void setPersonagens(LinkedListOur personagens) {
         this.personagens = personagens;
     }
 

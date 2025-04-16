@@ -6,13 +6,13 @@ package model;
 
 import model.entities.Entity;
 import model.entities.PlayerCharacter;
-import structures.LinkedList;
+import structures.LinkedListOur;
 import structures.Node;
 
 
 public class BattlePvp extends Battle{
     
-    public BattlePvp(LinkedList participants) {
+    public BattlePvp(LinkedListOur participants) {
         super(participants);
     }
     
