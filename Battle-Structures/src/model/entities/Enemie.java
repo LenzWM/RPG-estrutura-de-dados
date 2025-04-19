@@ -16,8 +16,8 @@ public class Enemie extends Entity{
         if (target == null) {
             throw  new RuntimeException(getName() + " tried to attack a null target.");
         }
-
-        System.out.println(getName() + " attacks " + target.getName());
+        target.takeDamage(getDamage());
+        System.out.println(getName() + " attacks " + target.getName() + " Dealt: " + getDamage());
         try {
             Thread.sleep(2300);
         } catch (InterruptedException ex) {
@@ -82,7 +82,7 @@ public class Enemie extends Entity{
         Node<Entity> current = participants.getHead();
         while (current != null) {
             if (current.data.isAlive() && current.data instanceof PlayerCharacter) {
-                System.out.println(getName() + " hits " + current.data.getName() + " with dark energy!");
+                System.out.println(getName() + " hits " + current.data.getName() + " with dark energy!" + "Dealt: " + getDamage()/2);
                 current.data.takeDamage(getDamage() / 2);
                 try {
                     Thread.sleep(2300);

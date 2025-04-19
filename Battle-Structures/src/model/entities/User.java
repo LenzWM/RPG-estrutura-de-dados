@@ -28,10 +28,12 @@ public class User {
 
     public void criarPersonagem(String nome) {
         int id = personagens.getSize() + 1;
-        int nivel = 1;
-        int vidaBase = 50 + (nivel * 10);
-        int manaBase = 30 + (nivel * 5);
-        PlayerCharacter novoPersonagem = new PlayerCharacter(vidaBase, manaBase, id, vidaBase, nivel, nome, manaBase);
+        int level = 1;
+        int vidaBase = 500;
+        int manaBase = 30;
+        int damage = 60;
+        PlayerCharacter novoPersonagem = new PlayerCharacter(id, vidaBase, manaBase, manaBase, level, nome, damage);
+        // public PlayerCharacter(int id, float maxHp, float maxMana, float currentMana, int level, String name, int damage) {
         personagens.addTail(novoPersonagem);
         
         if (personagens.getHead() == null) {

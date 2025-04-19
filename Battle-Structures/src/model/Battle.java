@@ -3,13 +3,14 @@ import Others.ClearConsole;
 import model.entities.*;
 import structures.*;
 
+
 public class Battle {
     private int battleID;
     private int turnCounter;
     private Stack defeatOrder;
     private Queue turnOrder;
     private LinkedListOur participants;
-    private boolean playerWon;
+    private PlayerCharacter player;
 
 
     public Battle(LinkedListOur participants){
@@ -30,6 +31,20 @@ public class Battle {
             turnCounter++;
             System.out.print("Turn " + turnCounter + ": ");
             executeTurn();
+        }
+        
+        if (player.isAlive()) {
+            showDefeatOrder();
+            System.out.println("\n");
+            player.levelUp();
+            System.out.println("You won, but at what cost?");
+            System.out.println("No mental health remaining.");
+            System.out.println("> YOU WIN <");
+
+        }
+        else {
+            showDefeatOrder();
+            System.out.println("> GAME OVER <");
         }
     }
 
@@ -87,6 +102,9 @@ public class Battle {
         while(current != null){
             if (current.data.isAlive()){
                 counter++;
+            }
+            if (current.data instanceof PlayerCharacter playerCharacter){
+                player = playerCharacter;
             }
             current = current.prev;
         }

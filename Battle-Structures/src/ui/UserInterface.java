@@ -1,5 +1,4 @@
 package ui;
-import java.util.Random;
 import java.util.Scanner;
 
 
@@ -82,7 +81,7 @@ public class UserInterface {
             }
         }
 
-        User newUser = new User(name, password); // Agora funciona com o novo construtor
+        User newUser = new User(name, password); 
         players.add(newUser);
         System.out.println("Cadastro realizado com sucesso!");
     }
@@ -104,9 +103,17 @@ public class UserInterface {
                     gerenciarPersonagens();
                     break;
                 case 2:
+                    if (playerLogado.getPlayerCharacter() == null) {
+                        System.out.println("You must pick a character before playing");
+                        break;
+                    }
                     iniciarBatalhaPvE();
                     break;
                 case 3:
+                    if (playerLogado.getPlayerCharacter() == null) {
+                        System.out.println("You must pick a character before playing");
+                        break;
+                    }
                     iniciarBatalhaPvP();
                     break;
                 case 4:
@@ -163,8 +170,12 @@ public class UserInterface {
         }
 
         PlayerCharacter p = (PlayerCharacter) playerLogado.getPersonagens().getHead().data;
+        Node<Entity> current = playerLogado.getPersonagens().getHead();
         for (int i = 0; i < playerLogado.getPersonagens().getSize(); i++) {
+            p = (PlayerCharacter) current.data;
             System.out.println(p.getId() + ": " + p.getName() + " (Nível " + p.getLevel() + ") - HP: " + p.getMaxHp());
+            current = current.prev;
+            
         }
     }
 
@@ -191,12 +202,17 @@ public class UserInterface {
     }
 
     private void iniciarBatalhaPvE (){
-        Entity enemy = new Enemie("Enemy", 1, 40, 50, 50, 10);
-        Entity boss = new Enemie("Boss", 1, 200,  50, 50, 20);
+        Entity enemy = new Enemie("goblin", 1, 20, 50, 50, 5);        
+        Entity enemy1 = new Enemie("spooky scary skeleton", 1, 20, 50, 50, 5);
+        Entity enemy2 = new Enemie("zombie", 1, 20, 50, 50, 5);
+
+        Entity boss = new Enemie("Boss goblin", 1, 50,  50, 50, 10);
         LinkedListOur participants = new LinkedListOur();
         participants.addTail(playerLogado.getPlayerCharacter());
         participants.addTail(boss);
         participants.addTail(enemy);
+        participants.addTail(enemy1);
+        participants.addTail(enemy2);
 
         Battle battle = new Battle(participants);
         battle.startBattle();
